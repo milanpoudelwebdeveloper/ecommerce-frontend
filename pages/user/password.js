@@ -16,8 +16,6 @@ const Password = () => {
 
   const admin = user && user?.role === 'admin'
 
-  console.log(admin)
-
   const updatepassword = async (e) => {
     e.preventDefault()
     setLoading(true)
