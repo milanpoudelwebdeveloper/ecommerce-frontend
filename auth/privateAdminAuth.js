@@ -14,10 +14,11 @@ const PrivateAdminAuth = ({ children }) => {
   useEffect(() => {
     if (user && user.token) {
       getCurrentAdmin(user.token)
-        .then((res) => {
+        .then((_) => {
           setOk(true)
         })
         .catch((e) => {
+          console.log(e)
           toast.error('Access not approved')
           setOk(false)
           router.replace('/')

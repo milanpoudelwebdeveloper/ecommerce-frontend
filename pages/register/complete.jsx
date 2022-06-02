@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { logIn } from '../../app/userSlice'
 import { useRouter } from 'next/router'
-import { createOrUpdateUser } from '../../apiFunctions/api'
+import { createOrUpdateUser } from '../../apiFunctions/user'
 
 const Register = () => {
   const [email, setEmail] = useState('')

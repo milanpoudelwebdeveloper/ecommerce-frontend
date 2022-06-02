@@ -24,7 +24,7 @@ const CategoriesList = () => {
 
   const showCategories = () => {
     return categories.map((c) => (
-      <Link href={`/category/${c.slug}`}>
+      <Link href={`/category/${c.slug}`} key={c._id}>
         <div
           key={c._id}
           className="col btn btn-outline-primary btn-lg btn-block btn-raised m-3"
