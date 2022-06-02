@@ -10,7 +10,7 @@
     "lint": "next lint",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "check-format": "prettier --check",
+    "check-format": "prettier --check .",
     "prepare": "husky install"
   },
   "keywords": [],
