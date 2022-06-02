@@ -70,7 +70,7 @@ const ProductInfoCard = ({ product }) => {
                 Add to Wishlist
               </div>
             </Link>,
-            <RatingModal setRating={sendRating}>
+            <RatingModal setRating={sendRating} key="rating">
               <Rating
                 ratingValue={selectedStar}
                 onClick={(value) => setSelectedStar(value)}

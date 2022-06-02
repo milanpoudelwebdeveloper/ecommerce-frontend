@@ -42,7 +42,7 @@ const CategoryInfo = () => {
             </h4>
           ) : (
             <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-              {allProducts?.length} in "{category?.name}" category
+              {allProducts?.length} in &quot;{category?.name}&quot; category
             </h4>
           )}
         </div>

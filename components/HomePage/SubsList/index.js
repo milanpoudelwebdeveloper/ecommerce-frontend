@@ -24,7 +24,7 @@ const SubsList = () => {
 
   const showSubs = () => {
     return subs.map((s) => (
-      <Link href={`/subs/${s.slug}`}>
+      <Link href={`/subs/${s.slug}`} key={s._id}>
         <div
           key={s._id}
           className="col btn btn-outline-primary btn-lg btn-block btn-raised m-3"
