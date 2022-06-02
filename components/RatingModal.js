@@ -1,9 +1,7 @@
-import { Button, Modal } from 'antd'
-import { toast } from 'react-toastify'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StarOutlined } from '@ant-design/icons'
-
+import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 
 const RatingModal = ({ children, setRating }) => {
