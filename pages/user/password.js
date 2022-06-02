@@ -14,7 +14,7 @@ const Password = () => {
   const [loading, setLoading] = useState(false)
   const user = useSelector((state) => state.user)
 
-  const admin = user.role === 'admin'
+  const admin = user && user?.role === 'admin'
 
   console.log(admin)
 
