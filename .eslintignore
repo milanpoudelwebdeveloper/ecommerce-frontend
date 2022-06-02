@@ -1,0 +1,9 @@
+.next
+out
+next
+node_modules
+yarn.lock
+package-lock.json
+next.config.json
+.env.local
+.github

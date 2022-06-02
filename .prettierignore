@@ -1,0 +1,7 @@
+.next
+node_modules
+public
+next.config.js
+.env.local
+.github
+package-lock.json
