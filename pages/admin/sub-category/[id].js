@@ -39,7 +39,7 @@ const UpdateSubCategory = () => {
     const response = await getSub(slug)
     console.log(response.data)
     setSelectedCategory(response.data.parent)
-    setSubName(response.data.name)
+    setSubName(response.data.subCategory.name)
   }
 
   const subUpdate = async (e) => {

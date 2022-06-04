@@ -30,7 +30,7 @@ const CategoryUpdate = () => {
   const getCategoryInfo = async () => {
     try {
       const response = await getCategory(id)
-      response && setCategoryName(response.data.name)
+      setCategoryName(response.data.category.name)
     } catch (e) {
       console.log(e)
     }
