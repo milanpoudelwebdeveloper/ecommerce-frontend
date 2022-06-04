@@ -56,7 +56,12 @@ const ProductInfoCard = ({ product }) => {
       </div>
       <div className="col-md-6">
         <h1 className="bg-info p-3">{title}</h1>
-        <Rating ratingValue={averageRatings * 20} readonly fillColor="red" />
+        {ratings?.length > 0 ? (
+          <Rating ratingValue={averageRatings * 20} readonly fillColor="red" />
+        ) : (
+          <div className="text-center pt-1 pb-3">No ratings yet</div>
+        )}
+
         <Card
           actions={[
             <div key="cart">
