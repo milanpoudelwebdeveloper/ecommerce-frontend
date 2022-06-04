@@ -20,7 +20,7 @@ const Register = () => {
     //using config that is required by the firebase. here that config.url is the url that we redirect the user
     //to  after the user clicks on the link sent on the email by firebase
     const config = {
-      url: process.env.REGISTER_COMPLETE,
+      url: process.env.NEXT_PUBLIC_REGISTER_COMPLETE,
       handleCodeInApp: true,
     }
 
