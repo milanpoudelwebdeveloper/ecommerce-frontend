@@ -25,7 +25,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Hi welcome to this app</h1>
       <NewArrivals totalProductsCount={totalProductsCount} />
       <BestSellers totalProductsCount={totalProductsCount} />
       <CategoriesList />
