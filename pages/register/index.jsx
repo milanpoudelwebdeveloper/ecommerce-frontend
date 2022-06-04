@@ -5,7 +5,6 @@ import { auth } from '../../utils/firebase'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { REGISTER_COMPLETE } from '../../routes'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -21,7 +20,7 @@ const Register = () => {
     //using config that is required by the firebase. here that config.url is the url that we redirect the user
     //to  after the user clicks on the link sent on the email by firebase
     const config = {
-      url: REGISTER_COMPLETE,
+      url: process.env.REGISTER_COMPLETE,
       handleCodeInApp: true,
     }
 
