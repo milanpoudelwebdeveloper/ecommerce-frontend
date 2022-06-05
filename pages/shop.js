@@ -35,8 +35,10 @@ const Shop = () => {
 
   useEffect(() => {
     if (text !== '') {
-      console.log('Text based search running')
-      fetchProductByFilter({ query: text })
+      const delayed = setTimeout(() => {
+        fetchProductByFilter({ query: text })
+      }, 300)
+      return () => clearTimeout(delayed)
     } else {
       loadProducts()
     }
