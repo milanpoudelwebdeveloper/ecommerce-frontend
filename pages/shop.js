@@ -6,13 +6,17 @@ import {
 } from '../apiFunctions/product'
 import ProductCardHome from '../components/ProductCardHome'
 import { Menu } from 'antd'
-import { DollarOutlined } from '@ant-design/icons'
-import PriceRange from '../components/PriceRange'
+import { DollarOutlined, DownSquareOutlined } from '@ant-design/icons'
+import PriceRange from '../components/Filters/PriceRange'
+import CategoryFilter from '../components/Filters/CategoryFilter'
+import { getCategories } from '../apiFunctions/category'
 
 const { SubMenu } = Menu
 
 const Shop = () => {
   const [products, setProducts] = useState([])
+  const [allCategories, setAllCategories] = useState([])
+
   const [loading, setLoading] = useState(false)
   const search = useSelector((state) => state.search)
 
@@ -21,17 +25,30 @@ const Shop = () => {
   const [searchQueries, setSearchQueries] = useState({
     searchText: text,
     price: [0, 10000],
+    selectedCategories: [],
   })
 
   useEffect(() => {
     setSearchQueries({ ...searchQueries, searchText: text })
   }, [text])
 
-  const { searchText, price } = searchQueries
+  const { searchText, price, selectedCategories } = searchQueries
 
   useEffect(() => {
     loadProducts()
+    loadAllCategories()
   }, [])
+
+  //load all categories
+
+  const loadAllCategories = async () => {
+    try {
+      const response = await getCategories()
+      setAllCategories(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   //load products by default on page load
   const loadProducts = async () => {
@@ -49,11 +66,12 @@ const Shop = () => {
   //load products on user search input
 
   useEffect(() => {
+    console.log('hey your search queries', searchQueries)
     const delayed = setTimeout(() => {
       fetchProductByFilter(searchQueries)
     }, 300)
     return () => clearTimeout(delayed)
-  }, [searchText, price])
+  }, [searchText, price, selectedCategories])
 
   const fetchProductByFilter = async (arg) => {
     try {
@@ -63,6 +81,8 @@ const Shop = () => {
       console.log(e)
     }
   }
+
+  console.log('the final values are', searchQueries)
 
   return (
     <div className="container-fluid">
@@ -83,6 +103,24 @@ const Shop = () => {
               }
             >
               <PriceRange key={'1'} price={price} setPrice={setSearchQueries} />
+            </SubMenu>
+            <SubMenu
+              key={'2'}
+              title={
+                <span
+                  className="h6"
+                  style={{ display: 'flex', alignItems: 'center', gap: '3' }}
+                >
+                  <DownSquareOutlined style={{ marginLeft: '10px' }} />
+                  <span>Categories</span>
+                </span>
+              }
+            >
+              <CategoryFilter
+                categories={allCategories}
+                setCategories={setSearchQueries}
+                selectedCategories={selectedCategories}
+              />
             </SubMenu>
           </Menu>
         </div>
