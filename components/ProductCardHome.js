@@ -7,7 +7,7 @@ import { Rating } from 'react-simple-star-rating'
 
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
-  const { title, slug, description, images, ratings } = product
+  const { title, slug, description, images, ratings, price } = product
 
   const averageRatings = ratings && getAverageRating(ratings)
   return (
@@ -54,6 +54,7 @@ const ProductCardHome = ({ product }) => {
         ]}
       >
         <Meta title={title} description={description}></Meta>
+        <div className="h6 mt-4">Price: {price}</div>
       </Card>
     </>
   )

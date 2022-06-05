@@ -5,14 +5,29 @@ import {
   getProductsByCount,
 } from '../apiFunctions/product'
 import ProductCardHome from '../components/ProductCardHome'
+import { Menu } from 'antd'
+import { DollarOutlined } from '@ant-design/icons'
+import PriceRange from '../components/PriceRange'
+
+const { SubMenu } = Menu
 
 const Shop = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
-
   const search = useSelector((state) => state.search)
 
   const { text } = search
+
+  const [searchQueries, setSearchQueries] = useState({
+    searchText: text,
+    price: [0, 10000],
+  })
+
+  useEffect(() => {
+    setSearchQueries({ ...searchQueries, searchText: text })
+  }, [text])
+
+  const { searchText, price } = searchQueries
 
   useEffect(() => {
     loadProducts()
@@ -34,28 +49,43 @@ const Shop = () => {
   //load products on user search input
 
   useEffect(() => {
-    if (text !== '') {
-      const delayed = setTimeout(() => {
-        fetchProductByFilter({ query: text })
-      }, 300)
-      return () => clearTimeout(delayed)
-    } else {
-      loadProducts()
-    }
-  }, [text])
+    const delayed = setTimeout(() => {
+      fetchProductByFilter(searchQueries)
+    }, 300)
+    return () => clearTimeout(delayed)
+  }, [searchText, price])
 
-  const fetchProductByFilter = async (text) => {
+  const fetchProductByFilter = async (arg) => {
     try {
-      const response = await fetchProductsByFilter(text)
+      const response = await fetchProductsByFilter(arg)
       setProducts(response.data)
     } catch (e) {
       console.log(e)
     }
   }
+
   return (
     <div className="container-fluid">
       <div className="row mt-3">
-        <div className="col-md-3">Search/Filter Menu</div>
+        <div className="col-md-3">
+          <h4>Search Filter</h4>
+          <Menu mode="inline" defaultOpenKeys={['1', '2']}>
+            <SubMenu
+              key={'1'}
+              title={
+                <span
+                  className="h6"
+                  style={{ display: 'flex', alignItems: 'center', gap: '3' }}
+                >
+                  <DollarOutlined style={{ marginLeft: '10px' }} />
+                  <span>Price</span>
+                </span>
+              }
+            >
+              <PriceRange key={'1'} price={price} setPrice={setSearchQueries} />
+            </SubMenu>
+          </Menu>
+        </div>
         <div className="col-md-9">
           {loading ? (
             <h4 className="text-danger">Loading....</h4>
