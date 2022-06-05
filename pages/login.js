@@ -142,7 +142,7 @@ const LogIn = () => {
             >
               Login in with Google
             </Button>
-            <Link type="submit" href="forgot-password" passHref>
+            <Link type="submit" href="/forgot-password" passHref>
               <p
                 className="float-right text-danger"
                 style={{ cursor: 'pointer' }}

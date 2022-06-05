@@ -71,3 +71,7 @@ export const setRating = async (productId, authToken, star) => {
     }
   )
 }
+
+export const fetchProductsByFilter = async (arg) => {
+  return await axios.post(`${process.env.NEXT_PUBLIC_API}/search/filters`, arg)
+}
