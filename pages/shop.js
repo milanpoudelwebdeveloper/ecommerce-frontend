@@ -1,24 +1,53 @@
 import React, { useEffect, useState } from 'react'
-import { getProductsByCount } from '../apiFunctions/product'
+import { useSelector } from 'react-redux'
+import {
+  fetchProductsByFilter,
+  getProductsByCount,
+} from '../apiFunctions/product'
 import ProductCardHome from '../components/ProductCardHome'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
 
+  const search = useSelector((state) => state.search)
+
+  const { text } = search
+
   useEffect(() => {
     loadProducts()
   }, [])
 
+  //load products by default on page load
   const loadProducts = async () => {
     setLoading(true)
     try {
-      const response = await getProductsByCount(5)
+      const response = await getProductsByCount(12)
       setProducts(response.data)
       setLoading(false)
     } catch (e) {
       console.log(e)
       setLoading(false)
+    }
+  }
+
+  //load products on user search input
+
+  useEffect(() => {
+    if (text !== '') {
+      console.log('Text based search running')
+      fetchProductByFilter({ query: text })
+    } else {
+      loadProducts()
+    }
+  }, [text])
+
+  const fetchProductByFilter = async (text) => {
+    try {
+      const response = await fetchProductsByFilter(text)
+      setProducts(response.data)
+    } catch (e) {
+      console.log(e)
     }
   }
   return (
