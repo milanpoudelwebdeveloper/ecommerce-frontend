@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { logOut as logOutR } from '../app/userSlice'
 import { HOME, LOGIN, REGISTER } from '../routes'
+import SearchNavForm from './forms/SearchNavForm'
 
 const { Item, SubMenu } = Menu
 const Navbar = () => {
@@ -93,6 +94,9 @@ const Navbar = () => {
           </Item>
         )}
       </SubMenu>
+      <span className="float-right p-1">
+        <SearchNavForm />
+      </span>
     </Menu>
   )
 }
