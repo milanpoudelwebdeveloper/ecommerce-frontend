@@ -16,7 +16,7 @@ const SearchNavForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (e.target.value) {
+    if (text != '') {
       router.push(`/shop/${text}`)
     }
   }

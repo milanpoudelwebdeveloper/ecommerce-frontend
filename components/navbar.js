@@ -94,7 +94,7 @@ const Navbar = () => {
           </Item>
         )}
       </SubMenu>
-      <span className="float-right p-1">
+      <span className="float-right p-1" key="search">
         <SearchNavForm />
       </span>
     </Menu>
