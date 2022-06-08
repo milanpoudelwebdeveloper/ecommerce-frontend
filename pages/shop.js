@@ -18,6 +18,8 @@ import LoadingCardSkeleton from '../components/Common/LoadingCardSkeleton'
 import StarRatings from '../components/Filters/StarRatings'
 import { getSubs } from '../apiFunctions/subCategory'
 import SubsFilter from '../components/Filters/SubsFilter'
+import ShippingFilter from '../components/Filters/ShippingFilter'
+import BrandsFilter from '../components/Filters/BrandsFilter'
 
 const { SubMenu } = Menu
 
@@ -36,14 +38,23 @@ const Shop = () => {
     selectedCategories: [],
     star: 0,
     selectedSubs: [],
+    selectedShipping: 'Yes',
+    selectedBrand: '',
   })
 
   useEffect(() => {
     setSearchQueries({ ...searchQueries, searchText: text })
   }, [text])
 
-  const { searchText, price, selectedCategories, star, selectedSubs } =
-    searchQueries
+  const {
+    searchText,
+    price,
+    selectedCategories,
+    star,
+    selectedSubs,
+    selectedShipping,
+    selectedBrand,
+  } = searchQueries
 
   useEffect(() => {
     loadProducts()
@@ -93,7 +104,15 @@ const Shop = () => {
       fetchProductByFilter(searchQueries)
     }, 300)
     return () => clearTimeout(delayed)
-  }, [searchText, price, selectedCategories, star, selectedSubs])
+  }, [
+    searchText,
+    price,
+    selectedCategories,
+    star,
+    selectedSubs,
+    selectedShipping,
+    selectedBrand,
+  ])
 
   const fetchProductByFilter = async (arg) => {
     setLoading(true)
@@ -114,7 +133,7 @@ const Shop = () => {
       <div className="row mt-3">
         <div className="col-md-3">
           <h4>Search Filter</h4>
-          <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4']}>
+          <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4', '5']}>
             <SubMenu
               key={'1'}
               title={
@@ -185,6 +204,41 @@ const Shop = () => {
                 </div>
               </SubMenu>
             )}
+
+            <SubMenu
+              className="mt-3"
+              key="5"
+              title={
+                <span
+                  className="h6"
+                  style={{ display: 'flex', alignItems: 'center', gap: '3' }}
+                >
+                  <StarOutlined style={{ marginLeft: '10px' }} />
+                  <span>Shipping-options</span>
+                </span>
+              }
+            >
+              <div style={{ margin: '-1opx' }}>
+                <ShippingFilter setShipping={setSearchQueries} />
+              </div>
+            </SubMenu>
+            <SubMenu
+              className="mt-3"
+              key="5"
+              title={
+                <span
+                  className="h6"
+                  style={{ display: 'flex', alignItems: 'center', gap: '3' }}
+                >
+                  <StarOutlined style={{ marginLeft: '10px' }} />
+                  <span>Brands</span>
+                </span>
+              }
+            >
+              <div style={{ margin: '-1opx' }}>
+                <BrandsFilter setBrands={setSearchQueries} />
+              </div>
+            </SubMenu>
           </Menu>
         </div>
         <div className="col-md-9">
