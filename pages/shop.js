@@ -123,9 +123,9 @@ const Shop = () => {
   const fetchProductByFilter = async (arg) => {
     setLoading(true)
     try {
-      setLoading(false)
       const response = await fetchProductsByFilter(arg)
       setProducts(response.data)
+      setLoading(false)
     } catch (e) {
       console.log(e)
       setLoading(false)
