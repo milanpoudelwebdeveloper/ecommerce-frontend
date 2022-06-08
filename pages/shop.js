@@ -7,8 +7,10 @@ import {
 import ProductCardHome from '../components/ProductCardHome'
 import { Menu } from 'antd'
 import {
+  BgColorsOutlined,
   DollarOutlined,
   DownSquareOutlined,
+  ShoppingCartOutlined,
   StarOutlined,
 } from '@ant-design/icons'
 import PriceRange from '../components/Filters/PriceRange'
@@ -20,6 +22,7 @@ import { getSubs } from '../apiFunctions/subCategory'
 import SubsFilter from '../components/Filters/SubsFilter'
 import ShippingFilter from '../components/Filters/ShippingFilter'
 import BrandsFilter from '../components/Filters/BrandsFilter'
+import ColorsFilter from '../components/Filters/ColorsFilter'
 
 const { SubMenu } = Menu
 
@@ -40,6 +43,7 @@ const Shop = () => {
     selectedSubs: [],
     selectedShipping: 'Yes',
     selectedBrand: '',
+    selectedColor: '',
   })
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const Shop = () => {
     selectedSubs,
     selectedShipping,
     selectedBrand,
+    selectedColor,
   } = searchQueries
 
   useEffect(() => {
@@ -112,6 +117,7 @@ const Shop = () => {
     selectedSubs,
     selectedShipping,
     selectedBrand,
+    selectedColor,
   ])
 
   const fetchProductByFilter = async (arg) => {
@@ -213,7 +219,7 @@ const Shop = () => {
                   className="h6"
                   style={{ display: 'flex', alignItems: 'center', gap: '3' }}
                 >
-                  <StarOutlined style={{ marginLeft: '10px' }} />
+                  <ShoppingCartOutlined style={{ marginLeft: '10px' }} />
                   <span>Shipping-options</span>
                 </span>
               }
@@ -237,6 +243,23 @@ const Shop = () => {
             >
               <div style={{ margin: '-1opx' }}>
                 <BrandsFilter setBrands={setSearchQueries} />
+              </div>
+            </SubMenu>
+            <SubMenu
+              className="mt-3"
+              key="5"
+              title={
+                <span
+                  className="h6"
+                  style={{ display: 'flex', alignItems: 'center', gap: '3' }}
+                >
+                  <BgColorsOutlined style={{ marginLeft: '10px' }} />
+                  <span>Colors</span>
+                </span>
+              }
+            >
+              <div style={{ margin: '-1opx' }}>
+                <ColorsFilter setColors={setSearchQueries} />
               </div>
             </SubMenu>
           </Menu>
