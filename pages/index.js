@@ -7,6 +7,7 @@ import SubsList from '../components/HomePage/SubsList'
 
 const Home = () => {
   const [totalProductsCount, setTotalProductsCount] = useState(0)
+
   useEffect(() => {
     loadTotalProductsCount()
   }, [])
