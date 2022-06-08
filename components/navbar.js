@@ -4,6 +4,7 @@ import {
   LoginOutlined,
   LogoutOutlined,
   SettingFilled,
+  ShoppingFilled,
   UserAddOutlined,
 } from '@ant-design/icons'
 import { Menu } from 'antd'
@@ -17,7 +18,7 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { logOut as logOutR } from '../app/userSlice'
-import { HOME, LOGIN, REGISTER } from '../routes'
+import { HOME, LOGIN, REGISTER, SHOP } from '../routes'
 import SearchNavForm from './forms/SearchNavForm'
 
 const { Item, SubMenu } = Menu
@@ -75,6 +76,11 @@ const Navbar = () => {
             </Item>
           </>
         )}
+        <Item key="shop" icon={<ShoppingFilled />} onClick={selectNavItem}>
+          <Link href={SHOP} passHref>
+            <a>Shop</a>
+          </Link>
+        </Item>
         <SubMenu
           title={userExists ? userExists.email : 'Username'}
           icon={<SettingFilled />}
