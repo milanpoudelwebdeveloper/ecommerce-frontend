@@ -26,7 +26,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Checking deployment</h1>
       <NewArrivals totalProductsCount={totalProductsCount} />
       <BestSellers totalProductsCount={totalProductsCount} />
       <CategoriesList />
