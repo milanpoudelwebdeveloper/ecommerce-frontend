@@ -30,6 +30,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-image-file-resizer": "^0.4.8",
+    "react-modal-image-responsive": "^1.1.1",
     "react-redux": "^8.0.2",
     "react-responsive-carousel": "^3.2.23",
     "react-simple-star-rating": "^4.0.5",
