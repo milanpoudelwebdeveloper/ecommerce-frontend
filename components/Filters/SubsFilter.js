@@ -16,7 +16,14 @@ const SubsFilter = ({ subsLists, selectedSubs, setSelectedSubs }) => {
   }
 
   return (
-    <div style={{ width: '100%', display: 'flex', gap: '4px' }}>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        gap: '4px',
+      }}
+      className="px-4"
+    >
       {subsLists?.map((s) => (
         <div
           key={s._id}

@@ -3,7 +3,7 @@ import StarRating from 'react-star-ratings'
 
 const StarRatings = ({ star, setStar }) => {
   return (
-    <div className="ml-4">
+    <div className="ml-4 px-4">
       <StarRating
         changeRating={(rating) =>
           setStar((prevState) => ({

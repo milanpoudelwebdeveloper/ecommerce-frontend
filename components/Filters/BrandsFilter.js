@@ -14,7 +14,7 @@ const BrandsFilter = ({ setBrands }) => {
 
   return (
     <Radio.Group onChange={onChange} value={value}>
-      <Space direction="vertical">
+      <Space direction="vertical" className="p-4">
         {brands.map((o) => (
           <Radio value={o} key={o}>
             {o}
