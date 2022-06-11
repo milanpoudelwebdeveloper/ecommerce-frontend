@@ -24,7 +24,7 @@ const AllProducts = () => {
     if (answer) {
       try {
         const response = await deleteProduct(slug, token)
-        console.log(response)
+
         toast.success(response.data)
         loadProducts()
       } catch (e) {
@@ -38,7 +38,6 @@ const AllProducts = () => {
     loadProducts()
   }, [])
 
-  console.log(products)
   return (
     <PrivateAdminAuth>
       <div className="container-fluid">

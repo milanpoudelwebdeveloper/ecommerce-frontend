@@ -3,17 +3,12 @@ import React from 'react'
 
 const CategoryFilter = ({ categories, setCategories, selectedCategories }) => {
   const handleCategories = (e) => {
-    console.log(e.target.value)
     const categories = [...selectedCategories]
-
-    console.log('hey categories', categories)
 
     //if found the element it returns the index otherwise -1
     let foundCategoryIndex = categories.indexOf(e.target.value)
 
     const NotFound = foundCategoryIndex === -1
-
-    console.log(NotFound)
 
     if (NotFound) {
       categories.push(e.target.value)

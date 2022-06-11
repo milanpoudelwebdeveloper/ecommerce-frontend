@@ -86,7 +86,6 @@ const ProductCreate = () => {
   }
 
   const handleImageRemove = async (imageId) => {
-    console.log(authToken)
     try {
       const response = await deleteImage(imageId, authToken)
       const { images } = values

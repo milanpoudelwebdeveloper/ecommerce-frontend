@@ -132,8 +132,6 @@ const Shop = () => {
     }
   }
 
-  console.log('the final values are', searchQueries)
-
   return (
     <div className="container-fluid">
       <div className="row mt-3">

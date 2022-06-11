@@ -15,7 +15,6 @@ const SubsFilter = ({ subsLists, selectedSubs, setSelectedSubs }) => {
     }
   }
 
-  console.log('hey selected subs', selectedSubs)
   return (
     <div style={{ width: '100%', display: 'flex', gap: '4px' }}>
       {subsLists?.map((s) => (

@@ -26,7 +26,6 @@ const NewArrivals = ({ totalProductsCount }) => {
     }
   }
 
-  console.log(newProducts)
   return (
     <>
       <Jumbotron text={loading ? 'Loading' : 'Latest Products'} />

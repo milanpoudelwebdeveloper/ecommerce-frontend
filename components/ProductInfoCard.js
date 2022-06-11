@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
-import Link from 'next/link'
 import ImageCarousel from './Common/ImageCarousel'
 import ProductRightInfo from './ProductRightInfo'
 import { Rating } from 'react-simple-star-rating'
@@ -11,12 +10,14 @@ import { Tabs } from 'antd'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getAverageRating } from '../utils/getAverageRating'
+import { addToWishList } from '../apiFunctions/wishlist'
 
 const { TabPane } = Tabs
 
 const ProductInfoCard = ({ product }) => {
   const user = useSelector((state) => state.user)
   const { title, description, images, _id, ratings } = product
+  const token = user?.token
 
   const [selectedStar, setSelectedStar] = useState(0)
 
@@ -30,7 +31,14 @@ const ProductInfoCard = ({ product }) => {
     }
   }
 
-  console.log('Ratings are', ratings)
+  const addWishlist = async () => {
+    try {
+      const response = await addToWishList(_id, token)
+      toast.success(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const averageRatings = ratings && getAverageRating(ratings)
 
@@ -68,13 +76,11 @@ const ProductInfoCard = ({ product }) => {
               <ShoppingCartOutlined className="text-success" /> <br />
               Add to Cart
             </div>,
-            <Link href="/" passHref key="wishlist">
-              <div>
-                <HeartOutlined />
-                <br />
-                Add to Wishlist
-              </div>
-            </Link>,
+            <div onClick={addWishlist} key="wislist">
+              <HeartOutlined />
+              <br />
+              Add to Wishlist
+            </div>,
             <RatingModal setRating={sendRating} key="rating">
               <Rating
                 ratingValue={selectedStar}

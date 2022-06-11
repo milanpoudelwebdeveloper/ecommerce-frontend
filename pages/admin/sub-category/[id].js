@@ -37,7 +37,7 @@ const UpdateSubCategory = () => {
 
   const getSubInfo = async (slug) => {
     const response = await getSub(slug)
-    console.log(response.data)
+
     setSelectedCategory(response.data.parent)
     setSubName(response.data.subCategory.name)
   }
@@ -61,7 +61,6 @@ const UpdateSubCategory = () => {
     }
   }
 
-  console.log(selectedCategory)
   return (
     <div className="container-fluid">
       <div className="row">
