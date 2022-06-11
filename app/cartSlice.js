@@ -9,9 +9,12 @@ export const cartSlice = createSlice({
     addToCart: (_, action) => {
       return action.payload
     },
+    emptyCart: () => {
+      return []
+    },
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, emptyCart } = cartSlice.actions
 
 export default cartSlice.reducer

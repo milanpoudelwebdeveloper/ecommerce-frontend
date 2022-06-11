@@ -21,6 +21,7 @@ import { useRouter } from 'next/router'
 import { logOut as logOutR } from '../app/userSlice'
 import { HOME, LOGIN, REGISTER, SHOP } from '../routes'
 import SearchNavForm from './forms/SearchNavForm'
+import { emptyCart } from '../app/cartSlice'
 
 const { Item, SubMenu } = Menu
 const Navbar = () => {
@@ -44,6 +45,8 @@ const Navbar = () => {
       signOut(auth).then(() => {
         toast.success('Signed Out Successfully')
         dispatch(logOutR(null))
+        dispatch(emptyCart())
+        localStorage.removeItem('ecommerce-cart')
         router.push('/login')
       })
     } catch (e) {
