@@ -38,7 +38,7 @@ const CategoryUpdate = () => {
 
   const categoryUpdate = async (e) => {
     e.preventDefault()
-    console.log(user.token)
+
     try {
       const response = await updateCategory(
         id,

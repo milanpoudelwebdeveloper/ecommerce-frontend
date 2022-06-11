@@ -2,6 +2,7 @@ import React from 'react'
 
 import PrivateAuth from '../../auth/privateAuth'
 import UserNav from '../../components/UserNav'
+import WishListCards from '../../components/WishList'
 
 const WishList = () => {
   return (
@@ -11,7 +12,10 @@ const WishList = () => {
           <div className="col-md-2">
             <UserNav />
           </div>
-          <div className="col">Your WishList</div>
+          <div className="col">
+            <h4>WishList</h4>
+            <WishListCards />
+          </div>
         </div>
       </div>
     </PrivateAuth>

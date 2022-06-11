@@ -71,7 +71,7 @@ const ProductUpdate = () => {
 
   const loadProductInfo = async (slug) => {
     const response = await getProductInfo(slug)
-    console.log(response.data)
+
     let preSubs = []
     response?.data?.subs?.map((sub) => preSubs.push(sub._id))
     setValues((prevState) => ({
@@ -133,8 +133,6 @@ const ProductUpdate = () => {
       toast.error(e)
     }
   }
-
-  console.log('images are', values.images)
 
   return (
     <div className="container-fluid">

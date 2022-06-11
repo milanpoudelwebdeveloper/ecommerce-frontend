@@ -5,7 +5,6 @@ const ProductRightInfo = ({ product }) => {
   const { price, category, subs, shipping, color, brand, quantity, sold } =
     product
 
-  console.log(category)
   return (
     <ul className="list-group">
       <li

@@ -4,10 +4,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons'
 const Pagination = ({ totalItems, currentPage, setCurrentPage }) => {
   const showPerPage = 3
 
-  console.log(totalItems, showPerPage)
   const totalButtons = totalItems && Math.ceil(totalItems / showPerPage)
-
-  console.log('total buttons is', totalButtons)
 
   const hasEnded = totalButtons === currentPage
 
