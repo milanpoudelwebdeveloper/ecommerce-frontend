@@ -5,12 +5,15 @@ import Link from 'next/link'
 import { getAverageRating } from '../utils/getAverageRating'
 import { Rating } from 'react-simple-star-rating'
 import _ from 'lodash'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../app/cartSlice'
 
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
   const { title, slug, description, images, ratings, price } = product
   const [toolTip, setToolTip] = useState('Click to add')
   const averageRatings = ratings && getAverageRating(ratings)
+  const dispatch = useDispatch()
 
   const handleAddToCart = () => {
     console.log('Adding to localStorage')
@@ -27,12 +30,12 @@ const ProductCardHome = ({ product }) => {
         ...product,
         count: 1,
       })
-
       //before saving to localStorage, we remove duplicates, we use loadash library for it
       let unique = _.uniqWith(cart, _.isEqual)
       // it compares and gives only products that are unique and we save it finally
       window.localStorage.setItem('ecommerce-cart', JSON.stringify(unique))
       setToolTip('Added')
+      dispatch(addToCart(unique))
     }
   }
 

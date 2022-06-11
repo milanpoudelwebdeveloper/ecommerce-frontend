@@ -8,7 +8,7 @@ import {
   ShoppingFilled,
   UserAddOutlined,
 } from '@ant-design/icons'
-import { Menu } from 'antd'
+import { Menu, Badge, Avatar } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { auth } from '../utils/firebase'
@@ -29,6 +29,10 @@ const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState('/')
 
   const userExists = useSelector((state) => state.user)
+
+  const cart = useSelector((state) => state.cart)
+
+  const cartLength = cart?.length
 
   const dashboardLink =
     userExists && userExists.role === 'admin'
@@ -84,7 +88,9 @@ const Navbar = () => {
         </Item>
         <Item key="cart" icon={<CarryOutOutlined />}>
           <Link href={'/cart'} passHref>
-            Cart
+            <Badge count={cartLength}>
+              <Avatar shape="square" size="large" />
+            </Badge>
           </Link>
         </Item>
         <Item key="search" onClick={selectNavItem} className="mx-auto">
