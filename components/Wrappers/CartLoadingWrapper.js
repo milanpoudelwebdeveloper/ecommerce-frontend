@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../app/cartSlice'
+import { addToCart } from '../../app/cartSlice'
 
 const CartLoadingWrapper = () => {
   const dispatch = useDispatch()

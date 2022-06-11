@@ -1,25 +1,32 @@
 import React, { useState } from 'react'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import { Card } from 'antd'
+import { Card, Tooltip } from 'antd'
 import ImageCarousel from './Common/ImageCarousel'
 import ProductRightInfo from './ProductRightInfo'
 import { Rating } from 'react-simple-star-rating'
 import RatingModal from './RatingModal'
 import { setRating } from '../apiFunctions/product'
 import { Tabs } from 'antd'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getAverageRating } from '../utils/getAverageRating'
 import { addToWishList } from '../apiFunctions/wishlist'
+import { handleAddToCart } from '../utils/addToCart'
+import { addToCart } from '../app/cartSlice'
+import { useRouter } from 'next/router'
 
 const { TabPane } = Tabs
 
 const ProductInfoCard = ({ product }) => {
   const user = useSelector((state) => state.user)
-  const { title, description, images, _id, ratings } = product
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const { title, description, images, _id, ratings, slug } = product
   const token = user?.token
 
   const [selectedStar, setSelectedStar] = useState(0)
+
+  const [toolTipText, setToolTipText] = useState('Click to Add')
 
   const sendRating = async () => {
     try {
@@ -32,12 +39,25 @@ const ProductInfoCard = ({ product }) => {
   }
 
   const addWishlist = async () => {
-    try {
-      const response = await addToWishList(_id, token)
-      toast.success(response.data)
-    } catch (e) {
-      console.log(e)
+    if (user && user.token) {
+      try {
+        const response = await addToWishList(_id, token)
+        toast.success(response.data)
+      } catch (e) {
+        console.log(e)
+      }
+    } else {
+      router.push({
+        pathname: '/login',
+        query: { from: `/product/${slug}` },
+      })
     }
+  }
+
+  const addToCartHandler = () => {
+    const uniqueCartItems = handleAddToCart(product)
+    dispatch(addToCart(uniqueCartItems))
+    setToolTipText('Added')
   }
 
   const averageRatings = ratings && getAverageRating(ratings)
@@ -72,10 +92,12 @@ const ProductInfoCard = ({ product }) => {
 
         <Card
           actions={[
-            <div key="cart">
-              <ShoppingCartOutlined className="text-success" /> <br />
-              Add to Cart
-            </div>,
+            <Tooltip title={toolTipText} key="cart">
+              <div key="cart" onClick={addToCartHandler}>
+                <ShoppingCartOutlined className="text-success" /> <br />
+                Add to Cart
+              </div>
+            </Tooltip>,
             <div onClick={addWishlist} key="wislist">
               <HeartOutlined />
               <br />

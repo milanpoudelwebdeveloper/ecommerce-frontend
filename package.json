@@ -47,5 +47,8 @@
   "cacheDirectories": [
     "node_modules/",
     ".next/cache/"
-  ]
+  ],
+  "globals": {
+    "_": true
+  }
 }

@@ -8,7 +8,7 @@ import {
   ShoppingFilled,
   UserAddOutlined,
 } from '@ant-design/icons'
-import { Menu, Badge, Avatar } from 'antd'
+import { Menu, Badge } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { auth } from '../utils/firebase'
@@ -88,8 +88,8 @@ const Navbar = () => {
         </Item>
         <Item key="cart" icon={<CarryOutOutlined />}>
           <Link href={'/cart'} passHref>
-            <Badge count={cartLength}>
-              <Avatar shape="square" size="large" />
+            <Badge count={cartLength} offset={[9, 0]}>
+              Cart
             </Badge>
           </Link>
         </Item>

@@ -29,7 +29,8 @@ const LogIn = () => {
 
   const roleBasedRedirect = (res) => {
     //check if intended
-    let intentendRoute = router.query
+    let intentendRoute = router && router.query
+
     if (intentendRoute) {
       router.push(intentendRoute.from)
       return

@@ -4,9 +4,9 @@ import { Card, Tooltip } from 'antd'
 import Link from 'next/link'
 import { getAverageRating } from '../utils/getAverageRating'
 import { Rating } from 'react-simple-star-rating'
-import _ from 'lodash'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../app/cartSlice'
+import { handleAddToCart } from '../utils/addToCart'
 
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
@@ -15,30 +15,11 @@ const ProductCardHome = ({ product }) => {
   const averageRatings = ratings && getAverageRating(ratings)
   const dispatch = useDispatch()
 
-  const handleAddToCart = () => {
-    console.log('Adding to localStorage')
-    //create cart array
-    let cart = []
-    if (typeof window !== undefined) {
-      //if cart is in localStorage get it
-      if (window.localStorage.getItem('ecommerce-cart')) {
-        cart = JSON.parse(window.localStorage.getItem('ecommerce-cart'))
-      }
-      //if there is no item of that key in localStorage we set it
-      //count for the default would be 1
-      cart.push({
-        ...product,
-        count: 1,
-      })
-      //before saving to localStorage, we remove duplicates, we use loadash library for it
-      let unique = _.uniqWith(cart, _.isEqual)
-      // it compares and gives only products that are unique and we save it finally
-      window.localStorage.setItem('ecommerce-cart', JSON.stringify(unique))
-      setToolTip('Added')
-      dispatch(addToCart(unique))
-    }
+  const addToCartHandler = () => {
+    const uniqueCartItems = handleAddToCart(product)
+    dispatch(addToCart(uniqueCartItems))
+    setToolTip('Added')
   }
-
   return (
     <>
       {ratings?.length > 0 ? (
@@ -76,7 +57,7 @@ const ProductCardHome = ({ product }) => {
             </div>
           </Link>,
           <Tooltip title={toolTip} key="cart">
-            <div onClick={() => handleAddToCart()}>
+            <div onClick={addToCartHandler}>
               <ShoppingCartOutlined key="shop" className="text-danger" />
               <br />
               Add to Cart
