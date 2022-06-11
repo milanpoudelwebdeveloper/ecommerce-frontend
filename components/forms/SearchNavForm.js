@@ -22,14 +22,23 @@ const SearchNavForm = () => {
     <form
       className="form-inline my-2 my-lg-0"
       onSubmit={handleSubmit}
-      style={{ display: 'flex', alignItems: 'center' }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '2px',
+      }}
     >
       <input
         type="search"
         value={text}
-        placeholder="Search"
-        className="form-control mr-sm-2"
+        placeholder="Search for any product"
+        className="form-control"
         onChange={handleKeyWordChange}
+        style={{
+          borderBottomColor: 'gray',
+          borderBottomWidth: '2px',
+          outline: 'none',
+        }}
       />
       <SearchOutlined onClick={handleSubmit} style={{ cursor: 'pointer' }} />
     </form>

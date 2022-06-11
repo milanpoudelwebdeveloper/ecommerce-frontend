@@ -16,7 +16,7 @@ const ShippingFilter = ({ setShipping }) => {
 
   return (
     <Radio.Group onChange={onChange} value={value}>
-      <Space direction="vertical">
+      <Space direction="vertical" className="px-4">
         {shippingOptions.map((o) => (
           <Radio value={o} key={o}>
             {o}

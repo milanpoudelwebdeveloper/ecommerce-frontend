@@ -50,7 +50,7 @@ const Navbar = () => {
     setSelectedItem(e.key)
   }
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div>
       <Menu mode="horizontal" selectedKeys={[selectedItem]}>
         <Item key="/" icon={<AppstoreAddOutlined />} onClick={selectNavItem}>
           <Link href={HOME} passHref>
@@ -81,6 +81,9 @@ const Navbar = () => {
             <a>Shop</a>
           </Link>
         </Item>
+        <Item key="search" onClick={selectNavItem} className="mx-auto">
+          <SearchNavForm />
+        </Item>
         <SubMenu
           title={userExists ? userExists.email : 'Username'}
           icon={<SettingFilled />}
@@ -102,9 +105,6 @@ const Navbar = () => {
           )}
         </SubMenu>
       </Menu>
-      <span className="p-1" key="search">
-        <SearchNavForm />
-      </span>
     </div>
   )
 }

@@ -137,7 +137,10 @@ const Shop = () => {
       <div className="row mt-3">
         <div className="col-md-3">
           <h4>Search Filter</h4>
-          <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4', '5']}>
+          <Menu
+            mode="inline"
+            defaultOpenKeys={['1', '2', '3', '4', '5', '6', '7']}
+          >
             <SubMenu
               key={'1'}
               title={
@@ -228,7 +231,7 @@ const Shop = () => {
             </SubMenu>
             <SubMenu
               className="mt-3"
-              key="5"
+              key="6"
               title={
                 <span
                   className="h6"
@@ -245,7 +248,7 @@ const Shop = () => {
             </SubMenu>
             <SubMenu
               className="mt-3"
-              key="5"
+              key="7"
               title={
                 <span
                   className="h6"

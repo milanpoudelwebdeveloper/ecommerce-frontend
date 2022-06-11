@@ -3,7 +3,7 @@ import { Slider } from 'antd'
 
 const PriceRange = ({ price, setPrice }) => {
   return (
-    <div>
+    <div className="m-2">
       <Slider
         className="ml-4 mr-4 "
         tipFormatter={(v) => `$${v}`}
