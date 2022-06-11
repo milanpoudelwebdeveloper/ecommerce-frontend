@@ -1,5 +1,6 @@
 import {
   AppstoreAddOutlined,
+  CarryOutOutlined,
   DashboardFilled,
   LoginOutlined,
   LogoutOutlined,
@@ -79,6 +80,11 @@ const Navbar = () => {
         <Item key="shop" icon={<ShoppingFilled />} onClick={selectNavItem}>
           <Link href={SHOP} passHref>
             <a>Shop</a>
+          </Link>
+        </Item>
+        <Item key="cart" icon={<CarryOutOutlined />}>
+          <Link href={'/cart'} passHref>
+            Cart
           </Link>
         </Item>
         <Item key="search" onClick={selectNavItem} className="mx-auto">
