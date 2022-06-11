@@ -55,69 +55,67 @@ const Navbar = () => {
     setSelectedItem(e.key)
   }
   return (
-    <div>
-      <Menu mode="horizontal" selectedKeys={[selectedItem]}>
-        <Item key="/" icon={<AppstoreAddOutlined />} onClick={selectNavItem}>
-          <Link href={HOME} passHref>
-            <a>Ecommerce</a>
-          </Link>
-        </Item>
-        {!userExists && (
-          <>
-            <Item
-              key="/register"
-              icon={<UserAddOutlined />}
-              onClick={selectNavItem}
-            >
-              <Link href={REGISTER} passHref>
-                <a>Register</a>
-              </Link>
-            </Item>
-
-            <Item key="/login" icon={<LoginOutlined />} onClick={selectNavItem}>
-              <Link href={LOGIN} passHref>
-                <a>Login</a>
-              </Link>
-            </Item>
-          </>
-        )}
-        <Item key="shop" icon={<ShoppingFilled />} onClick={selectNavItem}>
-          <Link href={SHOP} passHref>
-            <a>Shop</a>
-          </Link>
-        </Item>
-        <Item key="cart" icon={<CarryOutOutlined />}>
-          <Link href={'/cart'} passHref>
-            <Badge count={cartLength} offset={[9, 0]}>
-              Cart
-            </Badge>
-          </Link>
-        </Item>
-        <Item key="search" onClick={selectNavItem} className="mx-auto">
-          <SearchNavForm />
-        </Item>
-        <SubMenu
-          title={userExists ? userExists.email : 'Username'}
-          icon={<SettingFilled />}
-          key="/submenu"
-          style={{ marginLeft: 'auto' }}
-        >
+    <Menu mode="horizontal" selectedKeys={[selectedItem]}>
+      <Item key="/" icon={<AppstoreAddOutlined />} onClick={selectNavItem}>
+        <Link href={HOME} passHref>
+          <a>Ecommerce</a>
+        </Link>
+      </Item>
+      {!userExists && (
+        <>
           <Item
-            key="dashboard"
-            icon={<DashboardFilled />}
-            onClick={() => router.push(dashboardLink)}
+            key="/register"
+            icon={<UserAddOutlined />}
+            onClick={selectNavItem}
           >
-            Dashboard
+            <Link href={REGISTER} passHref>
+              <a>Register</a>
+            </Link>
           </Item>
 
-          {userExists && (
-            <Item key="logOut" icon={<LogoutOutlined />} onClick={logOut}>
-              Log Out
-            </Item>
-          )}
-        </SubMenu>
-      </Menu>
-    </div>
+          <Item key="/login" icon={<LoginOutlined />} onClick={selectNavItem}>
+            <Link href={LOGIN} passHref>
+              <a>Login</a>
+            </Link>
+          </Item>
+        </>
+      )}
+      <Item key="shop" icon={<ShoppingFilled />} onClick={selectNavItem}>
+        <Link href={SHOP} passHref>
+          <a>Shop</a>
+        </Link>
+      </Item>
+      <Item key="cart" icon={<CarryOutOutlined />}>
+        <Link href={'/cart'} passHref>
+          <Badge count={cartLength} offset={[9, 0]}>
+            Cart
+          </Badge>
+        </Link>
+      </Item>
+      <Item key="search" onClick={selectNavItem} className="mx-auto">
+        <SearchNavForm />
+      </Item>
+      <SubMenu
+        title={userExists ? userExists.email : 'Username'}
+        icon={<SettingFilled />}
+        key="/submenu"
+        style={{ marginLeft: 'auto' }}
+      >
+        <Item
+          key="dashboard"
+          icon={<DashboardFilled />}
+          onClick={() => router.push(dashboardLink)}
+        >
+          Dashboard
+        </Item>
+
+        {userExists && (
+          <Item key="logOut" icon={<LogoutOutlined />} onClick={logOut}>
+            Log Out
+          </Item>
+        )}
+      </SubMenu>
+    </Menu>
   )
 }
 

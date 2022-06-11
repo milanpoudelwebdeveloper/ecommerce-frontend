@@ -44,7 +44,12 @@ const ProductCardHome = ({ product }) => {
                 : 'https://via.placeholder.com/150'
             }
             alt="product-photo"
-            style={{ height: '150px', objectFit: 'cover', width: 'full' }}
+            style={{
+              height: '250px',
+              objectFit: 'cover',
+              width: 'full',
+              objectPosition: 'center',
+            }}
             className="p-1"
           />
         }
@@ -67,7 +72,7 @@ const ProductCardHome = ({ product }) => {
         ]}
       >
         <Meta title={title} description={description}></Meta>
-        <div className="h6 mt-4">Price: {price}</div>
+        <div className="h6 mt-4">Price: ${price}</div>
       </Card>
     </>
   )
