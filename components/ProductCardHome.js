@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import { Card } from 'antd'
+import { Card, Tooltip } from 'antd'
 import Link from 'next/link'
 import { getAverageRating } from '../utils/getAverageRating'
 import { Rating } from 'react-simple-star-rating'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../app/cartSlice'
+import { handleAddToCart } from '../utils/addToCart'
 
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
   const { title, slug, description, images, ratings, price } = product
-
+  const [toolTip, setToolTip] = useState('Click to add')
   const averageRatings = ratings && getAverageRating(ratings)
+  const dispatch = useDispatch()
+
+  const addToCartHandler = () => {
+    const uniqueCartItems = handleAddToCart(product)
+    dispatch(addToCart(uniqueCartItems))
+    setToolTip('Added')
+  }
   return (
     <>
       {ratings?.length > 0 ? (
@@ -34,7 +44,12 @@ const ProductCardHome = ({ product }) => {
                 : 'https://via.placeholder.com/150'
             }
             alt="product-photo"
-            style={{ height: '150px', objectFit: 'cover', width: 'full' }}
+            style={{
+              height: '250px',
+              objectFit: 'cover',
+              width: 'full',
+              objectPosition: 'center',
+            }}
             className="p-1"
           />
         }
@@ -46,15 +61,18 @@ const ProductCardHome = ({ product }) => {
               <p>View Product</p>
             </div>
           </Link>,
-          <>
-            <ShoppingCartOutlined key="shop" className="text-danger" />
-            <br />
-            Add to Cart
-          </>,
+          <Tooltip title={toolTip} key="cart">
+            <div onClick={addToCartHandler}>
+              <ShoppingCartOutlined key="shop" className="text-danger" />
+              <br />
+              Add to Cart
+            </div>
+            ,
+          </Tooltip>,
         ]}
       >
         <Meta title={title} description={description}></Meta>
-        <div className="h6 mt-4">Price: {price}</div>
+        <div className="h6 mt-4">Price: ${price}</div>
       </Card>
     </>
   )

@@ -49,7 +49,7 @@ const CategoryInfo = () => {
       </div>
       <div className="row">
         {allProducts.map((p) => (
-          <div className="col" key={p._id}>
+          <div className="col-md-4" key={p._id}>
             <ProductCardHome product={p} />
           </div>
         ))}
