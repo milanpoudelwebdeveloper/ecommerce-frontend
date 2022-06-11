@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import { Card } from 'antd'
+import { Card, Tooltip } from 'antd'
 import Link from 'next/link'
 import { getAverageRating } from '../utils/getAverageRating'
 import { Rating } from 'react-simple-star-rating'
@@ -9,7 +9,7 @@ import _ from 'lodash'
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
   const { title, slug, description, images, ratings, price } = product
-
+  const [toolTip, setToolTip] = useState('Click to add')
   const averageRatings = ratings && getAverageRating(ratings)
 
   const handleAddToCart = () => {
@@ -32,6 +32,7 @@ const ProductCardHome = ({ product }) => {
       let unique = _.uniqWith(cart, _.isEqual)
       // it compares and gives only products that are unique and we save it finally
       window.localStorage.setItem('ecommerce-cart', JSON.stringify(unique))
+      setToolTip('Added')
     }
   }
 
@@ -71,11 +72,14 @@ const ProductCardHome = ({ product }) => {
               <p>View Product</p>
             </div>
           </Link>,
-          <div onClick={() => handleAddToCart()} key="cart">
-            <ShoppingCartOutlined key="shop" className="text-danger" />
-            <br />
-            Add to Cart
-          </div>,
+          <Tooltip title={toolTip} key="cart">
+            <div onClick={() => handleAddToCart()}>
+              <ShoppingCartOutlined key="shop" className="text-danger" />
+              <br />
+              Add to Cart
+            </div>
+            ,
+          </Tooltip>,
         ]}
       >
         <Meta title={title} description={description}></Meta>
