@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PrivateAdminAuth from '../../../auth/privateAdminAuth'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 import CategoryCreateForm from '../../../components/forms/CategoryCreateForm'
 import SearchForm from '../../../components/forms/SearchForm'
 import CategoriesCard from '../../../components/CategoriesCard'
