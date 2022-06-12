@@ -14,6 +14,7 @@ import { addToWishList } from '../apiFunctions/wishlist'
 import { handleAddToCart } from '../utils/addToCart'
 import { addToCart } from '../app/cartSlice'
 import { useRouter } from 'next/router'
+import { openDrawer } from '../app/drawerSlice'
 
 const { TabPane } = Tabs
 
@@ -57,6 +58,7 @@ const ProductInfoCard = ({ product }) => {
   const addToCartHandler = () => {
     const uniqueCartItems = handleAddToCart(product)
     dispatch(addToCart(uniqueCartItems))
+    dispatch(openDrawer(true))
     setToolTipText('Added')
   }
 

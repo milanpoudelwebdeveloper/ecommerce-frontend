@@ -5,12 +5,15 @@ import { addToCart } from '../../app/cartSlice'
 const CartLoadingWrapper = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    let cart = []
     if (typeof window !== 'undefined') {
-      const cartExists = window.localStorage.getItem('ecommerce-cart')
+      let cartExists = window.localStorage.getItem('ecommerce-cart')
       if (cartExists) {
-        cart = JSON.parse(cartExists)
-        dispatch(addToCart(cart))
+        const cartItems = JSON.parse(cartExists)
+        if (cartItems && cartItems.length > 0) {
+          dispatch(addToCart(cartItems))
+        } else {
+          dispatch(addToCart([]))
+        }
       }
     }
   })

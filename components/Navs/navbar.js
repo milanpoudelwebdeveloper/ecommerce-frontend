@@ -11,17 +11,17 @@ import {
 import { Menu, Badge } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { auth } from '../utils/firebase'
+import { auth } from '../../utils/firebase'
 import { signOut } from 'firebase/auth'
 import { useSelector } from 'react-redux'
 
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { logOut as logOutR } from '../app/userSlice'
-import { HOME, LOGIN, REGISTER, SHOP } from '../routes'
-import SearchNavForm from './forms/SearchNavForm'
-import { emptyCart } from '../app/cartSlice'
+import { logOut as logOutR } from '../../app/userSlice'
+import { HOME, LOGIN, REGISTER, SHOP } from '../../routes'
+import SearchNavForm from '../forms/SearchNavForm'
+import { emptyCart } from '../../app/cartSlice'
 
 const { Item, SubMenu } = Menu
 const Navbar = () => {

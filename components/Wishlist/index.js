@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getAllWishlists, updateWishList } from '../apiFunctions/wishlist'
+import { getAllWishlists, updateWishList } from '../../apiFunctions/wishlist'
 import { DeleteOutlined } from '@ant-design/icons'
 import { toast } from 'react-toastify'
 

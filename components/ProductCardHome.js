@@ -7,6 +7,7 @@ import { Rating } from 'react-simple-star-rating'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../app/cartSlice'
 import { handleAddToCart } from '../utils/addToCart'
+import { openDrawer } from '../app/drawerSlice'
 
 const ProductCardHome = ({ product }) => {
   const { Meta } = Card
@@ -18,6 +19,7 @@ const ProductCardHome = ({ product }) => {
   const addToCartHandler = () => {
     const uniqueCartItems = handleAddToCart(product)
     dispatch(addToCart(uniqueCartItems))
+    dispatch(openDrawer(true))
     setToolTip('Added')
   }
   return (
