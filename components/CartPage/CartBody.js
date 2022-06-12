@@ -3,6 +3,7 @@ import ModalImage from 'react-modal-image-responsive'
 import { colors } from '../../data/productData'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../app/cartSlice'
+import { toast } from 'react-toastify'
 
 const CartBody = ({ cart }) => {
   const dispatch = useDispatch()
@@ -33,7 +34,6 @@ const CartBody = ({ cart }) => {
 
   const handleCountChange = (e, productId) => {
     let cartItems = [...cart]
-
     cart.map((item) => {
       if (item._id === productId) {
         let foundElementIndex = cartItems.indexOf(item)
@@ -52,7 +52,17 @@ const CartBody = ({ cart }) => {
   return (
     <>
       {cart?.map(
-        ({ _id, images, title, price, brand, color, count, shipping }) => (
+        ({
+          _id,
+          images,
+          title,
+          price,
+          brand,
+          color,
+          count,
+          shipping,
+          quantity,
+        }) => (
           <tbody key={_id}>
             <tr>
               <td>
@@ -86,10 +96,15 @@ const CartBody = ({ cart }) => {
               <td>
                 <input
                   min={1}
+                  max={quantity}
                   defaultValue={count}
+                  className="form-control"
                   type="number"
                   onChange={(e) => {
-                    console.log('count is', count)
+                    if (count > quantity) {
+                      toast.error(`Max available quantity, ${quantity}`)
+                      return
+                    }
                     if (count >= 1) {
                       handleCountChange(e, _id)
                     }
