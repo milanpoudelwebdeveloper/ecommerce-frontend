@@ -1,6 +1,6 @@
 import React from 'react'
 import PrivateAdminAuth from '../../auth/privateAdminAuth'
-import AdminNav from '../../components/AdminNav'
+import AdminNav from '../../components/Navs/AdminNav'
 
 const Dashboard = () => {
   return (

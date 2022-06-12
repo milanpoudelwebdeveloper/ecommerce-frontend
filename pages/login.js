@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../utils/firebase'
 import {
+  getAuth,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -21,18 +22,18 @@ const LogIn = () => {
   const router = useRouter()
   const userExists = useSelector((state) => state.user)
 
+  let intentendRoute = router.query.from
+
   useEffect(() => {
-    if (userExists) {
+    if (userExists && !intentendRoute) {
       router.replace('/')
     }
   }, [userExists])
 
   const roleBasedRedirect = (res) => {
     //check if intended
-    let intentendRoute = router && router.query
-
     if (intentendRoute) {
-      router.push(intentendRoute.from)
+      router.push(intentendRoute)
       return
     }
     if (res.data.role === 'admin') {
@@ -71,6 +72,7 @@ const LogIn = () => {
   }
   const googleLogIn = () => {
     const provider = new GoogleAuthProvider()
+    const auth = getAuth()
     signInWithPopup(auth, provider)
       .then(async (result) => {
         const user = result.user
