@@ -29,7 +29,7 @@ const Cart = () => {
       </div>
       <div className="row">
         <div className="col-md-8">
-          {cartItems.length < 0 ? (
+          {cartItems.length <= 0 ? (
             <h4 className="m-4">
               No products on the cart item.
               <Link href={'/shop'} passHref>

@@ -49,6 +49,27 @@ const CartBody = ({ cart }) => {
     })
   }
 
+  const removeItemFromCart = (productId) => {
+    let cartItems = [...cart]
+    cart.map((item) => {
+      if (item._id === productId) {
+        //if found
+        let foundElementIndex = cartItems.indexOf(item)
+
+        console.log('found element index', foundElementIndex)
+        //now delete
+        cartItems.splice(foundElementIndex, 1)
+      }
+
+      //confusion here why sending  (cartItems) causes error
+      //and spreading it doesn't
+      dispatch(addToCart([...cartItems]))
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('ecommerce-cart', JSON.stringify(cartItems))
+      }
+    })
+  }
+
   return (
     <>
       {cart?.map(
@@ -112,7 +133,9 @@ const CartBody = ({ cart }) => {
                 />
               </td>
               <td>{shipping}</td>
-              <td>Delete</td>
+              <td>
+                <button onClick={() => removeItemFromCart(_id)}>Delete</button>
+              </td>
             </tr>
           </tbody>
         )
