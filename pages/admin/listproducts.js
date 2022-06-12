@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PrivateAdminAuth from '../../auth/privateAdminAuth'
-import AdminNav from '../../components/AdminNav'
+import AdminNav from '../../components/Navs/AdminNav'
 import { deleteProduct, getProductsByCount } from '../../apiFunctions/product'
 import { toast } from 'react-toastify'
 import ProductCard from '../../components/ProductCard'

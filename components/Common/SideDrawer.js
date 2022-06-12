@@ -35,6 +35,7 @@ const SideDrawer = () => {
             {p.images.length > 0 && (
               <img
                 src={p.images[0].url}
+                alt="product-image"
                 style={{
                   width: '100%',
                   height: '60px',
