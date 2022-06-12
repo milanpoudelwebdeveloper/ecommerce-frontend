@@ -1,6 +1,6 @@
 import React from 'react'
 import PrivateAuth from '../../auth/privateAuth'
-import UserNav from '../../components/UserNav'
+import UserNav from '../../components/Navs/UserNav'
 
 const history = () => {
   return (

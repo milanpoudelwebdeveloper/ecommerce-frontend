@@ -1,8 +1,8 @@
 import React from 'react'
 
 import PrivateAuth from '../../auth/privateAuth'
-import UserNav from '../../components/UserNav'
-import WishListCards from '../../components/WishList'
+import UserNav from '../../components/Navs/UserNav'
+import WishListCards from '../../components/Wishlist'
 
 const WishList = () => {
   return (
