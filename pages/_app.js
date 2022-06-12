@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 import { logIn } from '../app/userSlice'
 import { getCurrentUser } from '../apiFunctions/user'
 import CartLoadingWrapper from '../components/Wrappers/CartLoadingWrapper'
+import SideDrawer from '../components/Common/SideDrawer'
 
 // this app wrapper is for checking whether there is current user logged in the firebase
 //if there is then when app starts we check for it and update redux store with the current user
@@ -55,6 +56,7 @@ const MyAppWrapper = ({ children }) => {
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
+      <SideDrawer />
       {/* Wrapping the above wrapper to all components */}
       <CartLoadingWrapper />
       <MyAppWrapper>

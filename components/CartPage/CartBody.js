@@ -4,6 +4,7 @@ import { colors } from '../../data/productData'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../app/cartSlice'
 import { toast } from 'react-toastify'
+import { CloseOutlined } from '@ant-design/icons'
 
 const CartBody = ({ cart }) => {
   const dispatch = useDispatch()
@@ -134,7 +135,12 @@ const CartBody = ({ cart }) => {
               </td>
               <td>{shipping}</td>
               <td>
-                <button onClick={() => removeItemFromCart(_id)}>Delete</button>
+                <CloseOutlined
+                  onClick={() => removeItemFromCart(_id)}
+                  className="text-danger"
+                >
+                  Delete
+                </CloseOutlined>
               </td>
             </tr>
           </tbody>
