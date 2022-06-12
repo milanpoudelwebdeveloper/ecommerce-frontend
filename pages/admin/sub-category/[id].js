@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getCategories } from '../../../apiFunctions/category'
 import { getSub, updateSub } from '../../../apiFunctions/subCategory'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 
 const UpdateSubCategory = () => {
   const router = useRouter()

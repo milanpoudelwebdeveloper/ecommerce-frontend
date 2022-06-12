@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 import { createProduct } from '../../../apiFunctions/product'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
