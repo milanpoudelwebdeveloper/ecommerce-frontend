@@ -1,6 +1,6 @@
 import { Drawer } from 'antd'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { openDrawer } from '../../app/drawerSlice'
 
@@ -11,12 +11,6 @@ const SideDrawer = () => {
 
   const dispatch = useDispatch()
 
-  const [visible, setVisible] = useState(drawerState)
-
-  useEffect(() => {
-    setVisible(drawerState)
-  }, [drawerState])
-
   const onClose = () => {
     dispatch(openDrawer(false))
   }
@@ -26,7 +20,7 @@ const SideDrawer = () => {
       title={`Cart / ${cart.length} Products`}
       placement="right"
       onClose={onClose}
-      visible={visible}
+      visible={drawerState}
       className="text-center"
     >
       {cart.map((p) => (
