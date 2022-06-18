@@ -1,23 +1,27 @@
 import {
   AppstoreAddOutlined,
+  CarryOutOutlined,
   DashboardFilled,
   LoginOutlined,
   LogoutOutlined,
   SettingFilled,
+  ShoppingFilled,
   UserAddOutlined,
 } from '@ant-design/icons'
-import { Menu } from 'antd'
+import { Menu, Badge } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { auth } from '../utils/firebase'
+import { auth } from '../../utils/firebase'
 import { signOut } from 'firebase/auth'
 import { useSelector } from 'react-redux'
 
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { logOut as logOutR } from '../app/userSlice'
-import { HOME, LOGIN, REGISTER } from '../routes'
+import { logOut as logOutR } from '../../app/userSlice'
+import { HOME, LOGIN, REGISTER, SHOP } from '../../routes'
+import SearchNavForm from '../forms/SearchNavForm'
+import { emptyCart } from '../../app/cartSlice'
 
 const { Item, SubMenu } = Menu
 const Navbar = () => {
@@ -26,6 +30,10 @@ const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState('/')
 
   const userExists = useSelector((state) => state.user)
+
+  const cart = useSelector((state) => state.cart)
+
+  const cartLength = cart?.length
 
   const dashboardLink =
     userExists && userExists.role === 'admin'
@@ -37,6 +45,8 @@ const Navbar = () => {
       signOut(auth).then(() => {
         toast.success('Signed Out Successfully')
         dispatch(logOutR(null))
+        dispatch(emptyCart())
+        localStorage.removeItem('ecommerce-cart')
         router.push('/login')
       })
     } catch (e) {
@@ -73,6 +83,21 @@ const Navbar = () => {
           </Item>
         </>
       )}
+      <Item key="shop" icon={<ShoppingFilled />} onClick={selectNavItem}>
+        <Link href={SHOP} passHref>
+          <a>Shop</a>
+        </Link>
+      </Item>
+      <Item key="cart" icon={<CarryOutOutlined />}>
+        <Link href={'/cart'} passHref>
+          <Badge count={cartLength} offset={[9, 0]}>
+            Cart
+          </Badge>
+        </Link>
+      </Item>
+      <Item key="search" onClick={selectNavItem} className="mx-auto">
+        <SearchNavForm />
+      </Item>
       <SubMenu
         title={userExists ? userExists.email : 'Username'}
         icon={<SettingFilled />}

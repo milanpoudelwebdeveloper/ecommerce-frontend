@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getCategories } from '../../../apiFunctions/category'
 import { getSub, updateSub } from '../../../apiFunctions/subCategory'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 
 const UpdateSubCategory = () => {
   const router = useRouter()
@@ -37,9 +37,9 @@ const UpdateSubCategory = () => {
 
   const getSubInfo = async (slug) => {
     const response = await getSub(slug)
-    console.log(response.data)
+
     setSelectedCategory(response.data.parent)
-    setSubName(response.data.name)
+    setSubName(response.data.subCategory.name)
   }
 
   const subUpdate = async (e) => {
@@ -61,7 +61,6 @@ const UpdateSubCategory = () => {
     }
   }
 
-  console.log(selectedCategory)
   return (
     <div className="container-fluid">
       <div className="row">

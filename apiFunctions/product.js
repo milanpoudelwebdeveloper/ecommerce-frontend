@@ -27,7 +27,6 @@ export const deleteProduct = async (productSlug, authToken) => {
 //get single product info
 
 export const getProductInfo = async (slug) => {
-  console.log('getting your product info')
   return await axios.get(`${process.env.NEXT_PUBLIC_API}/product/${slug}`)
 }
 
@@ -54,7 +53,6 @@ export const getProducts = async (sort, order, page) => {
 }
 
 export const getTotalProductsCount = async () => {
-  console.log('get total products count is running')
   return await axios.get(`${process.env.NEXT_PUBLIC_API}/products/total`)
 }
 
@@ -70,4 +68,8 @@ export const setRating = async (productId, authToken, star) => {
       },
     }
   )
+}
+
+export const fetchProductsByFilter = async (arg) => {
+  return await axios.post(`${process.env.NEXT_PUBLIC_API}/search/filters`, arg)
 }

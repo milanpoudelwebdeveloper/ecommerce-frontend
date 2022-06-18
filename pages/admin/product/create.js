@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 import { createProduct } from '../../../apiFunctions/product'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import { getCategories, getCategorySubs } from '../../../apiFunctions/category'
 import { Avatar, Badge, Select } from 'antd'
 import FileUpload from '../../../components/forms/fileUpload'
 import { deleteImage } from '../../../apiFunctions/uploadImage'
+import { colors, brands } from '../../../data/productData'
 
 const { Option } = Select
 
@@ -21,9 +22,6 @@ const initialState = {
   shipping: '',
   quantity: '',
   images: [],
-  //we have colors from enum in backend so this is for giving options
-  colors: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
-  brands: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'ASUS', 'Dell'],
   color: '',
   brand: '',
 }
@@ -65,8 +63,6 @@ const ProductCreate = () => {
     subs,
     quantity,
     images,
-    colors,
-    brands,
   } = values
 
   const productCreate = async (e) => {
@@ -90,7 +86,6 @@ const ProductCreate = () => {
   }
 
   const handleImageRemove = async (imageId) => {
-    console.log(authToken)
     try {
       const response = await deleteImage(imageId, authToken)
       const { images } = values

@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import PrivateAuth from '../../auth/privateAuth'
-import UserNav from '../../components/UserNav'
-import AdminNav from '../../components/AdminNav'
+import UserNav from '../../components/Navs/UserNav'
+import AdminNav from '../../components/Navs/AdminNav'
 import { auth } from '../../utils/firebase'
 
 const Password = () => {
@@ -15,8 +15,6 @@ const Password = () => {
   const user = useSelector((state) => state.user)
 
   const admin = user && user?.role === 'admin'
-
-  console.log(admin)
 
   const updatepassword = async (e) => {
     e.preventDefault()

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { getCategory, updateCategory } from '../../../apiFunctions/category'
 import { toast } from 'react-toastify'
-import AdminNav from '../../../components/AdminNav'
+import AdminNav from '../../../components/Navs/AdminNav'
 
 //we will update category on this page
 
@@ -30,7 +30,7 @@ const CategoryUpdate = () => {
   const getCategoryInfo = async () => {
     try {
       const response = await getCategory(id)
-      response && setCategoryName(response.data.name)
+      setCategoryName(response.data.category.name)
     } catch (e) {
       console.log(e)
     }
@@ -38,7 +38,7 @@ const CategoryUpdate = () => {
 
   const categoryUpdate = async (e) => {
     e.preventDefault()
-    console.log(user.token)
+
     try {
       const response = await updateCategory(
         id,

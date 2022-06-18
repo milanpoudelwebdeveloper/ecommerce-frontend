@@ -32,7 +32,7 @@ const BestSellers = ({ totalProductsCount }) => {
       <h4 className="text-center p-3 mt-4 mb-4 display-5 jumboton">
         Best Sellers
       </h4>
-      <div className="container">
+      <div className="container mb-4">
         {loading ? (
           <LoadingCardSkeleton count={3} />
         ) : (

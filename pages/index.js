@@ -7,12 +7,12 @@ import SubsList from '../components/HomePage/SubsList'
 
 const Home = () => {
   const [totalProductsCount, setTotalProductsCount] = useState(0)
+
   useEffect(() => {
     loadTotalProductsCount()
   }, [])
 
   const loadTotalProductsCount = async () => {
-    console.log('total products count running')
     try {
       const response = await getTotalProductsCount()
       setTotalProductsCount(response.data)
@@ -20,8 +20,6 @@ const Home = () => {
       console.log(e)
     }
   }
-
-  console.log('total products count is', totalProductsCount)
 
   return (
     <div>

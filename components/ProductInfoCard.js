@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import { Card } from 'antd'
-import Link from 'next/link'
+import { Card, Tooltip } from 'antd'
 import ImageCarousel from './Common/ImageCarousel'
 import ProductRightInfo from './ProductRightInfo'
 import { Rating } from 'react-simple-star-rating'
 import RatingModal from './RatingModal'
 import { setRating } from '../apiFunctions/product'
 import { Tabs } from 'antd'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getAverageRating } from '../utils/getAverageRating'
+import { addToWishList } from '../apiFunctions/wishlist'
+import { handleAddToCart } from '../utils/addToCart'
+import { addToCart } from '../app/cartSlice'
+import { useRouter } from 'next/router'
+import { openDrawer } from '../app/drawerSlice'
 
 const { TabPane } = Tabs
 
 const ProductInfoCard = ({ product }) => {
   const user = useSelector((state) => state.user)
-  const { title, description, images, _id, ratings } = product
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const { title, description, images, _id, ratings, slug } = product
+  const token = user?.token
 
   const [selectedStar, setSelectedStar] = useState(0)
+
+  const [toolTipText, setToolTipText] = useState('Click to Add')
 
   const sendRating = async () => {
     try {
@@ -30,7 +39,28 @@ const ProductInfoCard = ({ product }) => {
     }
   }
 
-  console.log('Ratings are', ratings)
+  const addWishlist = async () => {
+    if (user && user.token) {
+      try {
+        const response = await addToWishList(_id, token)
+        toast.success(response.data)
+      } catch (e) {
+        console.log(e)
+      }
+    } else {
+      router.push({
+        pathname: '/login',
+        query: { from: `/product/${slug}` },
+      })
+    }
+  }
+
+  const addToCartHandler = () => {
+    const uniqueCartItems = handleAddToCart(product)
+    dispatch(addToCart(uniqueCartItems))
+    dispatch(openDrawer(true))
+    setToolTipText('Added')
+  }
 
   const averageRatings = ratings && getAverageRating(ratings)
 
@@ -56,20 +86,25 @@ const ProductInfoCard = ({ product }) => {
       </div>
       <div className="col-md-6">
         <h1 className="bg-info p-3">{title}</h1>
-        <Rating ratingValue={averageRatings * 20} readonly fillColor="red" />
+        {ratings?.length > 0 ? (
+          <Rating ratingValue={averageRatings * 20} readonly fillColor="red" />
+        ) : (
+          <div className="text-center pt-1 pb-3">No ratings yet</div>
+        )}
+
         <Card
           actions={[
-            <div key="cart">
-              <ShoppingCartOutlined className="text-success" /> <br />
-              Add to Cart
-            </div>,
-            <Link href="/" passHref key="wishlist">
-              <div>
-                <HeartOutlined />
-                <br />
-                Add to Wishlist
+            <Tooltip title={toolTipText} key="cart">
+              <div key="cart" onClick={addToCartHandler}>
+                <ShoppingCartOutlined className="text-success" /> <br />
+                Add to Cart
               </div>
-            </Link>,
+            </Tooltip>,
+            <div onClick={addWishlist} key="wislist">
+              <HeartOutlined />
+              <br />
+              Add to Wishlist
+            </div>,
             <RatingModal setRating={sendRating} key="rating">
               <Rating
                 ratingValue={selectedStar}
