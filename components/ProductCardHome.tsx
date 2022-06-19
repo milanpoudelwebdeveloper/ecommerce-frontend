@@ -59,11 +59,13 @@ const ProductCardHome: React.FC<{
         }
         actions={[
           <Link key="view" href={`/product/${slug}`} passHref>
-            <div>
-              <EyeOutlined className="text-warning" />
-              <br />
-              <p>View Product</p>
-            </div>
+            <a target="_blank">
+              <div>
+                <EyeOutlined className="text-warning" />
+                <br />
+                <p>View Product</p>
+              </div>
+            </a>
           </Link>,
           <Tooltip title={toolTip} key="cart">
             <div onClick={addToCartHandler}>

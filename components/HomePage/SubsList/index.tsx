@@ -4,9 +4,7 @@ import Link from 'next/link'
 
 const SubsList = () => {
   const [loading, setLoading] = useState(false)
-  const [subs, setSubs] = useState<
-    { _id: string; name: string; slug: string }[]
-  >([])
+  const [subs, setSubs] = useState<ISubCategory[]>([])
 
   useEffect(() => {
     loadSubs()

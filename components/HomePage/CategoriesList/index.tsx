@@ -4,13 +4,7 @@ import Link from 'next/link'
 
 const CategoriesList = () => {
   const [loading, setLoading] = useState(false)
-  const [categories, setCategories] = useState<
-    {
-      _id: string
-      name: string
-      slug: string
-    }[]
-  >([])
+  const [categories, setCategories] = useState<ICategory[]>([])
 
   useEffect(() => {
     loadCategories()
