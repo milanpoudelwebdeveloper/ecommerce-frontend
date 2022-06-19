@@ -7,6 +7,7 @@ import { RootState } from '../app/store'
 
 interface props {
   product: IProduct
+  // eslint-disable-next-line
   productDelete: (slug: string, token: string) => void
 }
 
