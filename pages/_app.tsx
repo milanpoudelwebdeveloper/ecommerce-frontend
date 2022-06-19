@@ -12,19 +12,24 @@ import CartLoadingWrapper from '../components/Wrappers/CartLoadingWrapper'
 import SideDrawer from '../components/Common/SideDrawer'
 import AppWrapper from '../components/Wrappers/AppWrapper'
 import { AppProps } from 'next/app'
+import { QueryClientProvider, QueryClient } from 'react-query'
+
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <SideDrawer />
-      {/* Wrapping the above wrapper to all components */}
-      <CartLoadingWrapper />
-      <AppWrapper>
-        <ToastContainer />
-        <Navbar />
-        <Component {...pageProps} />
-      </AppWrapper>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <SideDrawer />
+        {/* Wrapping the above wrapper to all components */}
+        <CartLoadingWrapper />
+        <AppWrapper>
+          <ToastContainer />
+          <Navbar />
+          <Component {...pageProps} />
+        </AppWrapper>
+      </Provider>
+    </QueryClientProvider>
   )
 }
 

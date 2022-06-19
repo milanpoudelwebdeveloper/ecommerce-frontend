@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export const handleAddToCart = (product: IProduct) => {
   //create cart array
-  let cart: ICart[] = []
+  let cart: any[] = []
   if (typeof window !== undefined) {
     //if cart is in localStorage get it
     if (window.localStorage.getItem('ecommerce-cart')) {
