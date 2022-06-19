@@ -99,7 +99,15 @@ const CartBody: React.FC<props> = ({ cart }) => {
               <td>
                 <div style={{ width: '100px', height: 'auto' }}>
                   {images.length && (
-                    <img src={images[0].url} alt="Laptop Image" />
+                    <img
+                      src={images[0].url}
+                      alt="Laptop Image"
+                      style={{
+                        width: '120px',
+                        height: '50px',
+                        objectFit: 'cover',
+                      }}
+                    />
                   )}
                 </div>
               </td>

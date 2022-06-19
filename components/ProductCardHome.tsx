@@ -13,7 +13,7 @@ const ProductCardHome: React.FC<{
   product: IProduct
 }> = ({ product }) => {
   const { Meta } = Card
-  const { title, slug, description, images, ratings } = product
+  const { title, slug, description, images, ratings, price } = product
   const [toolTip, setToolTip] = useState('Click to add')
   const averageRatings = ratings && getAverageRating(ratings)
   const dispatch = useDispatch()
@@ -76,6 +76,7 @@ const ProductCardHome: React.FC<{
         ]}
       >
         <Meta title={title} description={description}></Meta>
+        <div className="h6 mt-4">{`Price: ${price}`}</div>
       </Card>
     </>
   )
