@@ -30,7 +30,9 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-image-file-resizer": "^0.4.8",
+    "react-modal-image": "^2.5.0",
     "react-modal-image-responsive": "^1.1.1",
+    "react-query": "^3.39.1",
     "react-redux": "^8.0.2",
     "react-responsive-carousel": "^3.2.23",
     "react-simple-star-rating": "^4.0.5",
@@ -39,11 +41,14 @@
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "@types/react-star-ratings": "^2.3.0",
     "eslint": "^8.16.0",
     "eslint-config-next": "^12.1.6",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "typescript": "^4.7.4"
   },
   "cacheDirectories": [
     "node_modules/",
